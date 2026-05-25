@@ -1,0 +1,71 @@
+# @author Бельский Тимофей
+# @version 1.0
+# Файл конфигурации GitHub Actions для автоматической сборки Compose Multiplatform проекта.
+
+name: Build Multiplatform App
+
+on:
+  push:
+    # Запуск при пуше в любую из основных веток
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  # Задача для сборки Apple-платформ (требует macOS раннер)
+  build-apple:
+    name: Build iOS and Desktop (MacOS)
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # Сборка Klibs для iOS (проверка компиляции)
+    - name: Build iOS Klibs
+      run: ./gradlew :app:iosX64MainKlibs :app:iosArm64MainKlibs :app:iosSimulatorArm64MainKlibs
+
+    # Сборка десктопной версии для macOS
+    - name: Build Desktop (MacOS)
+      run: ./gradlew :app:packageDistributionForCurrentOS
+
+  # Задача для сборки Android, Web и Linux
+  build-android-web-linux:
+    name: Build Android, Web and Linux
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # Сборка Android
+    - name: Build Android
+      run: ./gradlew :app:assembleDebug
+
+    # Сборка Web (Wasm)
+    - name: Build Web (Wasm)
+      run: ./gradlew :app:wasmJsBrowserDistribution
+
+    # Сборка Desktop (Linux)
+    - name: Build Desktop (Linux)
+      run: ./gradlew :app:packageDistributionForCurrentOS
+
+    # Запуск общих тестов (Unit + Интеграционные)
+    - name: Run Common Tests
+      run: ./gradlew :app:allTests

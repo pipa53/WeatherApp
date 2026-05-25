@@ -1,0 +1,15 @@
+<resources>
+    <!--
+        Базовая тема приложения.
+        Наследуется от Material3 DayNight без ActionBar, так как интерфейс полностью на Compose.
+    -->
+    <style name="Base.Theme.Lab9project1_Belskiy" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Основной цвет бренда (можно настроить при необходимости) -->
+        <item name="colorPrimary">#625b71</item>
+        <!-- Цвет статус-бара будет соответствовать фону приложения -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Главная тема, используемая в AndroidManifest.xml -->
+    <style name="Theme.Lab9project1_Belskiy" parent="Base.Theme.Lab9project1_Belskiy" />
+</resources>

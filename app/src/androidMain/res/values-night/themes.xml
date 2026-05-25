@@ -1,0 +1,10 @@
+<resources>
+    <!--
+        Базовая темная тема приложения.
+        Наследуется от той же родительской темы, но Material3 автоматически подставит темную палитру.
+    -->
+    <style name="Base.Theme.Lab9project1_Belskiy" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Тёмный цвет для статус-бара в ночном режиме -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>

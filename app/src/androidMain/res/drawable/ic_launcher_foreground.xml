@@ -1,0 +1,15 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Солнце (желтый круг) -->
+    <path
+        android:fillColor="#FFD600"
+        android:pathData="M70,38m-14,0a14,14 0,1 1,28 0a14,14 0,1 1,-28 0" />
+
+    <!-- Облако (более аккуратное и симметричное) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,74h36c6.6,0 12,-5.4 12,-12s-5.4,-12 -12,-12c-1.4,0 -2.8,0.3 -4.2,0.7C64.3,42.3 56.8,36 48,36c-8.2,0 -15.3,5.4 -17.6,13.3c-5.4,1.2 -9.4,6 -9.4,11.7c0,6.6 5.4,12 12,12z" />
+</vector>
