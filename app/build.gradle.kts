@@ -13,6 +13,17 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+compose.desktop {
+    application {
+        mainClass = "com.example.lab9_project1_belskiy.MainKt"
+        nativeDistributions {
+            targetFormats(org.jetbrains.compose.desktop.application.dsl.TargetFormat.Dmg, org.jetbrains.compose.desktop.application.dsl.TargetFormat.Msi, org.jetbrains.compose.desktop.application.dsl.TargetFormat.Deb)
+            packageName = "Lab9-project1_Belskiy"
+            packageVersion = "1.0.0"
+        }
+    }
+}
+
 kotlin {
     jvmToolchain(11)
 
@@ -184,4 +195,8 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+tasks.register("runAppTests") {
+    dependsOn("testDebugUnitTest", "desktopTest")
 }
